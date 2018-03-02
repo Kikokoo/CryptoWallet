@@ -14,7 +14,6 @@ export class ExchangeComponent implements OnInit {
     
   }
 
-
   ngOnInit() {
     this.CoinMarketCapService.getList()
       .subscribe(res => {
