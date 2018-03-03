@@ -1,3 +1,18 @@
 <p>
   coins works!
 </p>
+
+<p *ngIf="CoinMarketCapService.initialised && CoinMarketCapService.loading">Loading...</p>
+
+<table id="crypto-container" >
+  <tr>
+    <th>Rank</th>
+    <th>ID</th>
+    <th>Symbol</th>
+  </tr>
+  <tr *ngFor="let crypto of cryptos">
+    <td class="left">{{ crypto.rank }}</td>
+    <td class="left">{{ crypto.id }}</td>
+    <td class="left">{{ crypto.symbol }}</td>
+  </tr>
+</table>
