@@ -12,6 +12,9 @@ import { HeaderComponent } from './header/header.component';
 import { WalletComponent } from './wallet/wallet.component';
 import { ExchangeComponent } from './exchange/exchange.component';
 import { NotfoundComponent } from './notfound/notfound.component';
+import { CoinsComponent } from './coins/coins.component';
+import { SettingsComponent } from './settings/settings.component';
+import { PortfolioComponent } from './portfolio/portfolio.component';
 
 
 @NgModule({
@@ -20,7 +23,10 @@ import { NotfoundComponent } from './notfound/notfound.component';
     HeaderComponent,
     WalletComponent,
     ExchangeComponent,
-    NotfoundComponent
+    NotfoundComponent,
+    CoinsComponent,
+    SettingsComponent,
+    PortfolioComponent
   ],
   imports: [
     BrowserModule,
