@@ -4,7 +4,7 @@
 <div class="colors">
   <h3>Colors</h3>
   <div class="colors-item"
-   *ngFor="let col of colors"
+    *ngFor="let col of colors"
     [style.background]="col" 
     (click)="onChangeBackground(col)"></div>
 </div>
@@ -12,7 +12,7 @@
 <div class="backgrounds">
     <h3>Colors</h3>
     <div class="background-item"
-     *ngFor="let backgr of backgrounds" 
-     [style.background-image]="'url(' + backgr + ')'"
-     (click)="onChangeBackground(backgr)" ></div>
+      *ngFor="let backgr of backgrounds" 
+      [style.background-image]="'url(' + backgr + ')'"
+      (click)="onChangeBackground(backgr)" ></div>
   </div>
