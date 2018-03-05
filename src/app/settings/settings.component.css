@@ -1,0 +1,14 @@
+.colors-item{
+    width: 60px;
+    height: 60px;
+    margin: 5px;
+    display: inline-block;
+}
+
+
+.background-item{
+    width: 60px;
+    height: 60px;
+    margin: 5px;
+    display: inline-block;
+}

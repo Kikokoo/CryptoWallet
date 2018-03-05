@@ -1,11 +1,15 @@
 <p>
   exchange works!
 </p>
-<!-- <div *ngIf="cryptos">
-  <div id="crypto-container" *ngFor="let crypto of objectKeys(cryptos)">
-    <span class="left">{{ crypto[0].id }}</span>
-    <span class="right">{{ cryptos[crypto].USD | currency:'USD':true }}</span>
-  </div>
-</div> -->
 
-<!-- {{cryptos[1].id}} -->
+<select name="company" [(ngModel)]="company" (ngModelChange)="onChange($event)">
+    <option [ngValue]="null" disabled>Choose your profile</option>
+    <option  *ngFor="let comp of companies" [value]="comp" [selected] = "comp == 'Apple'">
+        {{comp}}
+    </option>
+</select>
+
+<br />
+<br />
+
+{{newLog}}

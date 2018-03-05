@@ -8,6 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ExchangeComponent implements OnInit {
 
+  companies: string[] = ["Apple", "Huawei", "Xiaomi", "Samsung", "LG", "Motorola", "Alcatel"];
+  newLog: string;
+  
   constructor() {
     
   }
@@ -16,5 +19,9 @@ export class ExchangeComponent implements OnInit {
    
   }
 
-}
+  onChange(newLog){
+    this.newLog = newLog;
+    console.log(newLog);
+  }
 
+}
