@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SharedService } from '../shared/s.service';
 
 @Component({
   selector: 'app-settings',
@@ -7,23 +8,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SettingsComponent implements OnInit {
 
-public newBack: string;
+	public newBack: string;
+	ss: any;
 
-  colors: string[] = ["#eee", "#ddd", "#b00", "#ccc", "#dadada", "#f0f0f0", "#2e51cd"];
-  backgrounds: string[] = ["../../assets/ddd.png", 
-                           "../../assets/ddd.png",
-                           "../../assets/ddd.png",
-                           "../../assets/ddd.png",
-                           "../../assets/ddd.png",
-                           "../../assets/ddd.png"];
+	colors: string[] = ["#eee", "#660033", "#b00", "DarkSlateBlue ", "#090833", "#ff1caf", "#2e51cd"];
+	backgrounds: string[] = ["../../assets/ddd.png", 
+							"../../assets/ddd.png",
+							"../../assets/ddd.png",
+							"../../assets/ddd.png",
+							"../../assets/ddd.png",
+							"../../assets/ddd.png"];
 
-  constructor() { }
+	constructor(ss: SharedService) {
+		this.ss = ss;
+	}
 
-  ngOnInit() {
-  }
+	ngOnInit() {
+	}
 
-  onChangeBackground(backgroun){
-    this.newBack = backgroun;
-    console.log(backgroun);
-  }
+	changeBackground(col) {
+		this.ss.change(col);
+	}
+
 }

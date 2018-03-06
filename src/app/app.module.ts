@@ -7,6 +7,7 @@ import { RouterModule } from "@angular/router";
 import { routes } from "./app.routes";
 
 import { CoinMarketCapService } from './shared/coinmarketcap.service';
+import { SharedService } from './shared/s.service';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -35,7 +36,7 @@ import { PortfolioComponent } from './portfolio/portfolio.component';
     FormsModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [CoinMarketCapService],
+  providers: [CoinMarketCapService, SharedService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

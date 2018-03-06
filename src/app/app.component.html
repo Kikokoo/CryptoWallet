@@ -1,4 +1,6 @@
-<app-header></app-header>
-<div id="content" [style.background]="coll">
-    <router-outlet></router-outlet>
+<div class="wrap" [style.background] = "onMain">
+    <app-header></app-header>
+    <div id="content" [style.background]="">
+        <router-outlet></router-outlet>
+    </div>
 </div>
