@@ -1,10 +1,7 @@
-<p>
-  coins works!
-</p>
 
 <p *ngIf="CoinMarketCapService.initialised && CoinMarketCapService.loading">Loading...</p>
 
-<table id="crypto-container" >
+<table id="crypto-container">
   <tr>
     <th>Rank</th>
     <th>ID</th>
@@ -17,6 +14,6 @@
     <td class="left">{{ crypto.id }}</td>
     <td class="left">{{ crypto.symbol }}</td>
     <td class="left">{{ crypto.price_usd }}</td>
-    <td class="left">{{ crypto.percent_change_24h }}</td>
+    <td class="left" [style.color]="crypto.percent_change_24h.charAt(0) === '-' ? 'red' : '#00e700' ">{{ crypto.percent_change_24h }}%</td>
   </tr>
 </table>
