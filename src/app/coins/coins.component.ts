@@ -8,7 +8,7 @@ import { CoinMarketCapService } from '../shared/coinmarketcap.service';
 })
 export class CoinsComponent implements OnInit {
   cryptos: any;
-
+  
   constructor(private CoinMarketCapService: CoinMarketCapService) { }
 
   ngOnInit() {

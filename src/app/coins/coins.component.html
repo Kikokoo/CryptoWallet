@@ -11,7 +11,9 @@
   </tr>
   <tr *ngFor="let crypto of cryptos">
     <td class="left">{{ crypto.rank }}</td>
-    <td class="left">{{ crypto.id }}</td>
+    <td class="left">
+      <img src="https://files.coinmarketcap.com/static/img/coins_legacy/64x64/{{crypto.id}}.png" alt="" width="20" height="20">
+      {{ crypto.id }}</td>
     <td class="left">{{ crypto.symbol }}</td>
     <td class="left">{{ crypto.price_usd }}</td>
     <td class="left" [style.color]="crypto.percent_change_24h.charAt(0) === '-' ? 'red' : '#00e700' ">{{ crypto.percent_change_24h }}%</td>
