@@ -1,21 +1,54 @@
 
-<p *ngIf="CoinMarketCapService.initialised && CoinMarketCapService.loading">Loading...</p>
+<!-- <mat-spinner *ngIf="CoinMarketCapService.initialised && !CoinMarketCapService.loading" class="loader"></mat-spinner> -->
 
-<table id="crypto-container">
-  <tr>
-    <th>Rank</th>
-    <th>ID</th>
-    <th>Symbol</th>
-    <th>price_usd</th>
-    <th>percent_change_24h</th>
-  </tr>
-  <tr *ngFor="let crypto of cryptos">
-    <td class="left">{{ crypto.rank }}</td>
-    <td class="left">
-      <img src="https://files.coinmarketcap.com/static/img/coins_legacy/64x64/{{crypto.id}}.png" alt="" width="20" height="20">
-      {{ crypto.id }}</td>
-    <td class="left">{{ crypto.symbol }}</td>
-    <td class="left">{{ crypto.price_usd }}</td>
-    <td class="left" [style.color]="crypto.percent_change_24h.charAt(0) === '-' ? 'red' : '#00e700' ">{{ crypto.percent_change_24h }}%</td>
-  </tr>
-</table>
+<div class="example-container mat-elevation-z8">
+
+  <div class="example-header">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-select [(value)]="selected" (change)="onChange($event.value)">
+          <mat-option value="EUR">EUR</mat-option>
+          <mat-option value="USD">USD</mat-option>
+          <mat-option value="RUB">RUB</mat-option>
+        </mat-select>
+      </mat-form-field>
+  </div>
+
+  <mat-table #table [dataSource]="dataSource" matSort>
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="rank">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> rank. </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.rank}} </mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> id </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="symbol">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> symbol </mat-header-cell>
+      <mat-cell *matCellDef="let element"><a routerLink="/coins/{{element.id}}">{{element.symbol}}</a></mat-cell>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="price_usd">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> price_usd </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.price_usd}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="percent_change_24h">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> percent_change_24h </mat-header-cell>
+        <mat-cell *matCellDef="let element" [style.color]="element.percent_change_24h"> {{element.percent_change_24h}} </mat-cell>
+        <!-- .charAt(0) === '-' ? 'red' : '#00e700'  -->
+      </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>

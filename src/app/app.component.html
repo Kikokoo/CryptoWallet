@@ -1,6 +1,62 @@
-<div class="wrap" [style.background] = "onMain">
-    <app-header></app-header>
-    <div id="content" [style.background]="">
-        <router-outlet></router-outlet>
-    </div>
+
+<div [ngClass]="themeClass" class="wrap">
+  <mat-sidenav-container class="example-sidenav-container">
+      <mat-sidenav #snav [mode]="over">
+        <mat-nav-list>
+          <mat-list-item routerLink="/home" routerLinkActive="active" (click)="snav.close()">
+              <mat-icon mat-list-icon>home</mat-icon>
+              <h4>Home</h4>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item routerLink="/portfolio" routerLinkActive="active" (click)="snav.close()">
+              <mat-icon mat-list-icon>dialpad</mat-icon>
+              <h4>Portfolio</h4>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item routerLink="/wallet" routerLinkActive="active" (click)="snav.close()">
+              <mat-icon mat-list-icon>account_balance_wallet</mat-icon>
+              <h4>Wallet</h4>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item routerLink="/coins" routerLinkActive="active" (click)="snav.close()">
+              <mat-icon mat-list-icon>Coins</mat-icon>
+              <h4>Coins</h4>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item routerLink="/settings" routerLinkActive="active" (click)="snav.close()">
+            <mat-icon mat-list-icon>label</mat-icon>
+            <h4>Calculator</h4>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item routerLink="/exchange" routerLinkActive="active" (click)="snav.close()">
+            <mat-icon mat-list-icon>compare_arrows</mat-icon>
+            <h4>Exchange</h4>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item routerLink="/guide" routerLinkActive="active" (click)="snav.close()">
+            <mat-icon mat-list-icon>help</mat-icon>
+            <h4>Guide</h4>
+          </mat-list-item>
+        </mat-nav-list>
+      </mat-sidenav>
+  
+      <mat-sidenav-content>
+        <mat-toolbar color="primary">
+          <button mat-icon-button (click)="snav.toggle()" matTooltip="Toggle sidebar">
+            <mat-icon>menu</mat-icon>
+          </button>
+          <h1 class="example-app-name" matTooltip="lol">CryptoCalculator</h1>
+          <button mat-button [matMenuTriggerFor]="menu"><mat-icon>format_color_fill</mat-icon></button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="changeTheme('pink-dark-theme')">Dark Pink</button>
+            <button mat-menu-item (click)="changeTheme('default-theme')">Default</button>
+            <button mat-menu-item (click)="changeTheme('alternate-theme')">Alternate theme</button>
+          </mat-menu>
+          <a href="">Login</a>
+        </mat-toolbar>
+        <div  class="content">
+          <router-outlet></router-outlet>
+        </div>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
 </div>

@@ -7,7 +7,6 @@ import { RouterModule } from "@angular/router";
 import { routes } from "./app.routes";
 
 import { CoinMarketCapService } from './shared/coinmarketcap.service';
-import { SharedService } from './shared/s.service';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -18,6 +17,10 @@ import { CoinsComponent } from './coins/coins.component';
 import { SettingsComponent } from './settings/settings.component';
 import { PortfolioComponent } from './portfolio/portfolio.component';
 
+import {MaterialModule} from './material/material.module';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { HomeComponent } from './home/home.component';
+import { CoinComponent } from './coins/coin/coin.component';
 
 @NgModule({
   declarations: [
@@ -28,15 +31,19 @@ import { PortfolioComponent } from './portfolio/portfolio.component';
     NotfoundComponent,
     CoinsComponent,
     SettingsComponent,
-    PortfolioComponent
+    PortfolioComponent,
+    HomeComponent,
+    CoinComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
+    BrowserAnimationsModule,
     FormsModule,
+    MaterialModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [CoinMarketCapService, SharedService],
+  providers: [CoinMarketCapService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

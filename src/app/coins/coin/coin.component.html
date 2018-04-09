@@ -1,0 +1,136 @@
+<div *ngFor="let crypto of cryptos">
+
+<section id="coin-header">
+  <div class="container">
+    <img  src="https://chasing-coins.com/api/v1/std/logo/{{crypto.symbol}}" alt="logo">
+
+    <mat-form-field>
+      <mat-select [(value)]="selected" (change)="onChange($event.value)">
+        <mat-option value="EUR">EUR</mat-option>
+        <mat-option value="USD">USD</mat-option>
+        <mat-option value="RUB">RUB</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</section>
+
+
+
+<section id="short-stats">
+  <div class="container">
+    <div class="short-stats-wrap">
+    <mat-card class="short-stats-item">
+      <h4>Live Price</h4>
+      <p>The current average price.</p>
+      <h2>${{crypto.price_usd}}</h2>
+    </mat-card>
+    <mat-card class="short-stats-item">
+      <h4>Hourly Change</h4>
+      <p>Price change over last hour.</p>
+      <h2>{{crypto.percent_change_1h}}%</h2>
+    </mat-card>
+    <mat-card class="short-stats-item">
+      <h4>Daily Change</h4>
+      <p>Price change over 24 hours.</p>
+      <h2>{{crypto.percent_change_1h}}%</h2>
+    </mat-card>
+    <mat-card class="short-stats-item">
+      <h4>Weekly Change</h4>
+      <p>Price change over 7 days.</p>
+      <h2>{{crypto.percent_change_7d}}%</h2>
+    </mat-card>
+    </div>
+  </div>
+</section>
+
+<section id="coin-heat">
+  <div class="container">
+
+    <mat-grid-list cols="4" rowHeight="3:1">
+      <mat-grid-tile><h3>CoinHeat</h3></mat-grid-tile>
+      <mat-grid-tile [colspan] = 2>
+        <div class="coin-heat_progress">
+          <span class="coin-heat_value"></span>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile><span class="coin-hea">20/100</span></mat-grid-tile>
+    </mat-grid-list>
+  </div>
+</section>
+
+
+
+<section id="stats">
+  <div class="container">
+    <div class="stats-wrap">
+        <mat-card class="stats-item">
+          <table class="">            	
+            <tbody>
+              <tr>
+                <td><strong>name</strong></td>
+                <td>${{crypto.name}}</td>
+              </tr>
+
+              <tr>
+                <td><strong>Price</strong></td>
+                <td>${{crypto.price_usd}}</td>
+              </tr>
+                                
+              <tr>
+                <td><strong>Market Cap</strong></td>
+                <td>${{crypto.market_cap_usd}}</td>
+              </tr>
+              
+              <tr>
+                <td><strong>24 hour Volume<strong></strong></strong></td>
+                <td>{{crypto['24h_volume_usd']}}</td>
+              </tr>
+              
+              <tr>
+                <td><strong>price_btc</strong></td>
+                <td>{{crypto.price_btc}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </mat-card>
+  
+        <mat-card class="stats-item">
+          <table class="">            	
+            <tbody>
+              
+              <tr>
+                <td><strong>available_supply</strong></td>
+                <td>{{crypto.available_supply}}</td>
+              </tr>
+              
+              <tr>
+                <td><strong>total_supply</strong></td>
+                <td>{{crypto.total_supply}}</td>
+              </tr>
+              
+              <tr>
+                <td><strong>Percent change 1h</strong></td>
+                <td>{{crypto.percent_change_1h}}%</td>
+              </tr>
+                                      
+              <tr>
+                <td><strong>percent_change_24h</strong></td>
+                <td>{{crypto.percent_change_24h}}%</td>
+              </tr>
+              
+              <tr>
+                <td><strong>percent_change_7d</strong></td>
+                <td>{{crypto.percent_change_7d}}%</td>
+              </tr>
+            </tbody>
+          </table>
+        </mat-card>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <mat-card>Simple card</mat-card>
+</footer>
+
+</div>

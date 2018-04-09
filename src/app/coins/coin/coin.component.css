@@ -1,0 +1,52 @@
+#short-stats {
+    padding: 1.5em 0;
+}
+
+.short-stats-wrap {
+    display: flex;
+    flex-wrap: wrap;
+}
+.short-stats-item {
+    width: 22%;
+    margin-left: 4%;
+    display: inline-block;
+}
+.short-stats-item:first-child {
+    margin-left: 0;
+}
+
+/*
+    Coin Heat
+*/
+.coin-heat_progress {
+    width: 500px;
+    height: 20px;
+    border-radius: 10px;
+    background: #ccc;
+}
+.coin-heat_value {
+    display: block;
+    width: 40%;
+    height: 20px;
+    border-radius: 10px;
+    background: #f00;
+}
+
+/*******************/
+
+#stats {
+    padding: 1.5em 0;
+}
+.stats-wrap {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.stats-item {
+    display: flex;
+    width: 48%;
+    margin-left: 4%;
+}
+.stats-item:first-child {
+    margin-left: 0;
+}

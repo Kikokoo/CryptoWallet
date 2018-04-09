@@ -1,5 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CoinMarketCapService } from '../shared/coinmarketcap.service';
+import {MatTableDataSource, MatSort} from '@angular/material';
+
+import {DataSource} from '@angular/cdk/collections';
+import { Observable } from 'rxjs/Observable';
+
 
 @Component({
   selector: 'app-coins',
@@ -8,6 +13,21 @@ import { CoinMarketCapService } from '../shared/coinmarketcap.service';
 })
 export class CoinsComponent implements OnInit {
   cryptos: any;
+  selected = 'USD';
+
+  displayedColumns = ['rank', 'id', 'symbol', 'price_usd', 'percent_change_24h'];
+  dataSource;
+
+  @ViewChild(MatSort) sort: MatSort;
+
+  /**
+   * Set the sort after the view init since this component will
+   * be able to query its view for the initialized sort.
+   */
+  ngAfterViewInit() {
+    //this.dataSource.sort = this.sort;
+    
+  }
   
   constructor(private CoinMarketCapService: CoinMarketCapService) { }
 
@@ -15,8 +35,35 @@ export class CoinsComponent implements OnInit {
     this.CoinMarketCapService.getList()
     .subscribe(res => {
       this.cryptos = res;
-      console.log(res);
+
+      this.dataSource = new MatTableDataSource(this.cryptos);
+      this.dataSource.sort = this.sort;
     });
   }
 
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
+  }
+
+}
+
+export class UserDataSource extends DataSource<any> {
+  constructor(private CoinMarketCapService: CoinMarketCapService) {
+    super();
+  }
+  connect(): Observable<any> {
+    return this.CoinMarketCapService.getList();
+  }
+  disconnect() {}
+}
+
+
+export interface Coin {
+  rank: string;
+  id: number;
+  symbol: number;
+  price_usd: string;
+  percent_change_24h: number;
 }

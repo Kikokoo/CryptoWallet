@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { SharedService } from './shared/s.service';
-
 
 @Component({
   selector: 'app-root',
@@ -11,14 +9,17 @@ export class AppComponent implements OnInit {
   onMain: string;
   ss: any;
   subscription: any;
+  themeClass = localStorage.getItem('classNameTheme');
 
-  constructor(ss: SharedService) {
-      this.onMain = "green";
-      this.ss = ss;
+  constructor() {
+    }
+
+    changeTheme(theme) {
+      this.themeClass = theme;
+      localStorage.setItem('classNameTheme', theme);
     }
 
     ngOnInit() {
-      this.subscription = this.ss.getEmittedValue()
-        .subscribe(item => this.onMain=item);
+      
     }
 }

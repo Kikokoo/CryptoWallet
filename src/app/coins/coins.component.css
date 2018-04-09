@@ -2,6 +2,30 @@ table, th, td {
     border: 1px solid black;
     text-align: center;
  }
- #crypto-container{
+ #crypto-container {
      background: white;
  }
+
+ .example-container {
+     max-width: 90%;
+     margin: 20px auto;
+ }
+
+ .example-header {
+    min-height: 64px;
+    padding: 8px 24px 0;
+    display: flex;
+  }
+  
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  .loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+  }
+  
