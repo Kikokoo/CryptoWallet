@@ -1,18 +1,47 @@
 import { Component, OnInit } from '@angular/core';
 
+import {ProfitcalculatorService} from '../shared/profitcalculator.service';
+import {Pair} from '../classes/pair';
+import {Currency} from '../classes/currency.enum';
+import {CryptowatchService} from '../shared/cryptowatch.service';
+import {Exchange} from '../classes/exchange.enum';
+import {Cryptocurrency} from '../classes/cryptocurrency.enum';
+
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
-  styleUrls: ['./settings.component.css']
+	styleUrls: ['./settings.component.css'],
+	providers: [CryptowatchService]
+	
 })
 export class SettingsComponent implements OnInit {
+	amount: number;
+  quick: boolean;
+  maker: number;
+  taker: number;
+  low: number;
+  high: number;
+  profit: number;
 
+  constructor(private cryptowatch: CryptowatchService) { }
 
-	constructor() {
-		
-	}
+  ngOnInit() {
+    this.amount = 100;
+    this.quick = false;
+    this.maker = 0.16;
+    this.taker = 0.26;
+    this.low = 0;
+    this.high = 0;
+    this.onChange();
+    this.cryptowatch.getPrice(new Pair(Cryptocurrency.BTC, Currency.EUR), Exchange.GDAX).subscribe(price => {
+      this.low = price;
+      this.high = price + 100;
+      this.onChange();
+    });
+  }
 
-	ngOnInit() {
-	}
-
+  onChange() {
+    this.profit = ProfitcalculatorService.calculateProfitFromRange(this.amount, this.quick,
+      this.maker / 100, this.taker / 100, this.low, this.high);
+  }
 }

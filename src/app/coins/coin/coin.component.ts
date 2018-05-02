@@ -41,6 +41,10 @@ export class CoinComponent implements OnInit {
       console.log(this.cryptos)
     });
   }
+
+  onChange(val) {
+    console.log(val)
+  }
   
   ngOnInit() {
   }
