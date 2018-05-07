@@ -43,10 +43,10 @@
     </ng-container>
 
     <ng-container matColumnDef="percent_change_24h">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> percent_change_24h </mat-header-cell>
-        <mat-cell *matCellDef="let element" [style.color]="element.percent_change_24h"> {{element.percent_change_24h}} </mat-cell>
-        <!-- .charAt(0) === '-' ? 'red' : '#00e700'  -->
-      </ng-container>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> percent_change_24h </mat-header-cell>
+      <mat-cell *matCellDef="let element" [style.color]="element.percent_change_24h"> {{element.percent_change_24h}} </mat-cell>
+      <!-- .charAt(0) === '-' ? 'red' : '#00e700'  -->
+    </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>

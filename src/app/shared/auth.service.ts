@@ -7,7 +7,12 @@ import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firesto
 
 import { Observable } from 'rxjs/Observable';
 import { switchMap } from 'rxjs/operators';
+import { AngularFireDatabase } from 'angularfire2/database';
 
+import { CoinMarketCapService } from '../shared/coinmarketcap.service';
+
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/do';
 interface User {
   uid: string;
   email?: string | null;
@@ -19,10 +24,14 @@ interface User {
 export class AuthService {
   authState: any = null;
   user: Observable<User | null>;
+  result;
 
-  constructor(private afAuth: AngularFireAuth,
+  constructor(
+    public db: AngularFireDatabase,
+    private afAuth: AngularFireAuth,
               private afs: AngularFirestore,
-              private router: Router) {
+              private router: Router,
+              private CoinMarketCapService: CoinMarketCapService) {
 
     this.user = this.afAuth.authState
       .switchMap((user) => {
@@ -151,5 +160,13 @@ export class AuthService {
     return userRef.set(data);
   }
 
+
+  getList() {
+    return this.db.list(`/items/${this.currentUserId}`).snapshotChanges()
+    .map(actions => {
+      console.log(`Action: ${actions}`);
+      return actions.map(action => ({ key: action.key, value: action.payload.val() }));
+    })
+  }
 
 }

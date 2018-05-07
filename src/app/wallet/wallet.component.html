@@ -5,9 +5,17 @@
 	<div style="width: 300px;">
 		<form (ngSubmit)="onSubmit()">
 			<div class="form-group">
-				<label for="item">Item</label> <input type="text"
-					class="form-control" placeholder="Enter content..." id="item"
-					required [(ngModel)]="itemValue" name="item">
+				<label for="item">Coin</label> <input type="text"
+					class="form-control" placeholder="Enter coin..." id="item"
+					required [(ngModel)]="coin" name="coin"><br>
+
+				<label for="item">Amount</label> <input type="text"
+					class="form-control" placeholder="Enter amount..." id="item"
+					required [(ngModel)]="amount" name="amount"><br>
+
+				<label for="item">Price</label> <input type="text"
+					class="form-control" placeholder="Enter Price..." id="item"
+					required [(ngModel)]="price" name="price"><br>
 			</div>
  
 			<div class="btn-group">
@@ -17,7 +25,67 @@
 	</div>
  
 	<h2>Content from Firebase</h2>
-	<div class="col-md-3">
-		<pre *ngFor="let item of items | async">{{item.content}}</pre>
-	</div>
+	<!-- <div class="col-md-3">
+		<table *ngFor="let item of hol">
+			<tr>
+				<th>1</th>
+				<th>2</th>
+				<th>3</th>
+			</tr>
+			<tr>	
+				<td>{{item.key}}</td>
+				<td>{{item.value.coin}}</td>
+				<td>{{item.coin[0].id}}</td>
+			</tr>
+		</table>
+		
+	</div> -->
+
+	<mat-table #table [dataSource]="dataSource" matSort>
+
+		<!-- Position Column -->
+		<ng-container matColumnDef="Coin">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> Coin </mat-header-cell>
+			<mat-cell *matCellDef="let element"> {{element.value.coin}} </mat-cell>
+		</ng-container>
+	
+		<!-- Name Column -->
+		<ng-container matColumnDef="Amount">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> Amount </mat-header-cell>
+			<mat-cell *matCellDef="let element"> {{element.value.amount}} </mat-cell>
+		</ng-container>
+	
+		<!-- Weight Column -->
+		<ng-container matColumnDef="Buy Price">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> Buy Price </mat-header-cell>
+			<mat-cell *matCellDef="let element">$ {{element.value.price}} </mat-cell>
+		</ng-container>
+	
+		<ng-container matColumnDef="Current Price">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> Current Price </mat-header-cell>
+			<mat-cell *matCellDef="let element"> $ {{element.coin[0].price_usd}} </mat-cell>
+			<!-- .charAt(0) === '-' ? 'red' : '#00e700'  -->
+		</ng-container>
+
+		<!-- Symbol Column -->
+		<ng-container matColumnDef="24h Change">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> 24h Change </mat-header-cell>
+			<mat-cell *matCellDef="let element"> {{element.coin[0].percent_change_24h}} %</mat-cell>
+		</ng-container>
+	
+		<ng-container matColumnDef="7d Change">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> 7d Change </mat-header-cell>
+			<mat-cell *matCellDef="let element"> {{element.coin[0].percent_change_7d}} %</mat-cell>
+			<!-- .charAt(0) === '-' ? 'red' : '#00e700'  -->
+		</ng-container>
+		
+		<ng-container matColumnDef="Profit">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> Profit </mat-header-cell>
+			<mat-cell *matCellDef="let element">$ {{element.coin[0].price_usd - element.value.price}} </mat-cell>
+			<!-- .charAt(0) === '-' ? 'red' : '#00e700'  -->
+		</ng-container>
+	
+		<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+		<mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+		</mat-table>
 </div>
