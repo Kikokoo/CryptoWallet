@@ -9,8 +9,6 @@ import { Observable } from 'rxjs/Observable';
 import { switchMap } from 'rxjs/operators';
 import { AngularFireDatabase } from 'angularfire2/database';
 
-import { CoinMarketCapService } from '../shared/coinmarketcap.service';
-
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 interface User {
@@ -30,8 +28,7 @@ export class AuthService {
     public db: AngularFireDatabase,
     private afAuth: AngularFireAuth,
               private afs: AngularFirestore,
-              private router: Router,
-              private CoinMarketCapService: CoinMarketCapService) {
+              private router: Router) {
 
     this.user = this.afAuth.authState
       .switchMap((user) => {

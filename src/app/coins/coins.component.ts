@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CoinMarketCapService } from '../shared/coinmarketcap.service';
-import {MatTableDataSource, MatSort} from '@angular/material';
 
 import {DataSource} from '@angular/cdk/collections';
+import {MatTableDataSource, MatSort} from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 
 

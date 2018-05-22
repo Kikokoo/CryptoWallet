@@ -15,7 +15,7 @@ import { ExchangeComponent } from './exchange/exchange.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { CoinsComponent } from './coins/coins.component';
 import { SettingsComponent } from './settings/settings.component';
-import { PortfolioComponent } from './portfolio/portfolio.component';
+import { NeedLoginComponent } from './need-login/need-login.component';
 
 import { MaterialModule } from './material/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -59,7 +59,7 @@ export const firebaseConfig = {
     NotfoundComponent,
     CoinsComponent,
     SettingsComponent,
-    PortfolioComponent,
+    NeedLoginComponent,
     HomeComponent,
     CoinComponent,
     AuthComponent,

@@ -2,7 +2,7 @@ import { Routes } from "@angular/router";
 import { WalletComponent } from "./wallet/wallet.component";
 import { ExchangeComponent } from "./exchange/exchange.component";
 import { NotfoundComponent } from "./notfound/notfound.component";
-import { PortfolioComponent } from "./portfolio/portfolio.component";
+import { NeedLoginComponent } from "./need-login/need-login.component";
 import { SettingsComponent } from "./settings/settings.component";
 import { CoinsComponent } from "./coins/coins.component";
 import { CoinComponent } from "./coins/coin/coin.component";
@@ -21,7 +21,7 @@ import { AuthGuard } from './shared/auth.guard';
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'portfolio', component: PortfolioComponent },
+  { path: 'need-login', component: NeedLoginComponent },
   { path: 'wallet', component: WalletComponent, canActivate: [AuthGuard] },
 
   { path: 'guides', component: GuidesComponent },

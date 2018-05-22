@@ -1,91 +1,91 @@
 
 
-<div class="container-fluid">
+<div class="container">
 	
-	<div style="width: 300px;">
+	<div>
 		<form (ngSubmit)="onSubmit()">
-			<div class="form-group">
-				<label for="item">Coin</label> <input type="text"
-					class="form-control" placeholder="Enter coin..." id="item"
-					required [(ngModel)]="coin" name="coin"><br>
+			
+			<mat-form-field>
+				<!-- <input matInput placeholder="Enter coin..." id="item" required [(ngModel)]="coin" name="coin"> -->
+				<mat-select placeholder="Coin" [(ngModel)]="coin" name="coin">
+					<mat-option>None</mat-option>
+					<mat-option *ngFor="let coin of listCoinID" [value]="coin">{{coin}}</mat-option>
+				  </mat-select>
+			</mat-form-field>
 
-				<label for="item">Amount</label> <input type="text"
-					class="form-control" placeholder="Enter amount..." id="item"
-					required [(ngModel)]="amount" name="amount"><br>
+			<mat-form-field>
+				<input matInput placeholder="Enter amount..." id="item" required [(ngModel)]="amount" name="amount">
+			</mat-form-field>
 
-				<label for="item">Price</label> <input type="text"
-					class="form-control" placeholder="Enter Price..." id="item"
-					required [(ngModel)]="price" name="price"><br>
-			</div>
- 
-			<div class="btn-group">
-				<button type="submit" class="btn btn-success">Submit</button>
-			</div>
+			<mat-form-field>
+				<input matInput placeholder="Enter Price..." id="item" required [(ngModel)]="price" name="price">
+			</mat-form-field>
+
+			<button mat-raised-button type="submit">Create wallet</button>
 		</form>
+
+		<div [hidden]="!chart" style="width: 300px">
+			<canvas id="canvas" >{{ chart }}</canvas>
+		</div>
 	</div>
  
 	<h2>Content from Firebase</h2>
-	<!-- <div class="col-md-3">
-		<table *ngFor="let item of hol">
-			<tr>
-				<th>1</th>
-				<th>2</th>
-				<th>3</th>
-			</tr>
-			<tr>	
-				<td>{{item.key}}</td>
-				<td>{{item.value.coin}}</td>
-				<td>{{item.coin[0].id}}</td>
-			</tr>
-		</table>
-		
-	</div> -->
 
 	<mat-table #table [dataSource]="dataSource" matSort>
 
-		<!-- Position Column -->
+		<!-- Coin Column -->
 		<ng-container matColumnDef="Coin">
 			<mat-header-cell *matHeaderCellDef mat-sort-header> Coin </mat-header-cell>
 			<mat-cell *matCellDef="let element"> {{element.value.coin}} </mat-cell>
 		</ng-container>
 	
-		<!-- Name Column -->
+		<!-- Amount Column -->
 		<ng-container matColumnDef="Amount">
 			<mat-header-cell *matHeaderCellDef mat-sort-header> Amount </mat-header-cell>
 			<mat-cell *matCellDef="let element"> {{element.value.amount}} </mat-cell>
 		</ng-container>
 	
-		<!-- Weight Column -->
+		<!-- Buy Price Column -->
 		<ng-container matColumnDef="Buy Price">
 			<mat-header-cell *matHeaderCellDef mat-sort-header> Buy Price </mat-header-cell>
 			<mat-cell *matCellDef="let element">$ {{element.value.price}} </mat-cell>
 		</ng-container>
 	
+		<!-- Current Price Column -->
 		<ng-container matColumnDef="Current Price">
 			<mat-header-cell *matHeaderCellDef mat-sort-header> Current Price </mat-header-cell>
 			<mat-cell *matCellDef="let element"> $ {{element.coin[0].price_usd}} </mat-cell>
 			<!-- .charAt(0) === '-' ? 'red' : '#00e700'  -->
 		</ng-container>
 
-		<!-- Symbol Column -->
+		<!-- 24h Change Column -->
 		<ng-container matColumnDef="24h Change">
 			<mat-header-cell *matHeaderCellDef mat-sort-header> 24h Change </mat-header-cell>
 			<mat-cell *matCellDef="let element"> {{element.coin[0].percent_change_24h}} %</mat-cell>
 		</ng-container>
 	
+		<!-- 7d Change Column -->
 		<ng-container matColumnDef="7d Change">
 			<mat-header-cell *matHeaderCellDef mat-sort-header> 7d Change </mat-header-cell>
 			<mat-cell *matCellDef="let element"> {{element.coin[0].percent_change_7d}} %</mat-cell>
 			<!-- .charAt(0) === '-' ? 'red' : '#00e700'  -->
 		</ng-container>
 		
+		<!-- Buy Price Column -->
 		<ng-container matColumnDef="Profit">
 			<mat-header-cell *matHeaderCellDef mat-sort-header> Profit </mat-header-cell>
 			<mat-cell *matCellDef="let element">$ {{element.coin[0].price_usd - element.value.price}} </mat-cell>
 			<!-- .charAt(0) === '-' ? 'red' : '#00e700'  -->
 		</ng-container>
+
+		<!-- Buy Price Column -->
+		<ng-container matColumnDef="Delete">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> Delete </mat-header-cell>
+			<mat-cell *matCellDef="let element"><span (click)='deleteItem(element.key)'>-</span> </mat-cell>
+			<!-- .charAt(0) === '-' ? 'red' : '#00e700'  -->
+		</ng-container>
 	
 		<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
 		<mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-		</mat-table>
+	</mat-table>
 </div>

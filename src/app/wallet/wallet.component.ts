@@ -8,7 +8,9 @@ import { Coin } from '../shared/coin';
 import {DataSource} from '@angular/cdk/collections';
 import {MatTableDataSource, MatSort} from '@angular/material';
 
+import { CoinMarketCapService } from '../shared/coinmarketcap.service';
 import { AuthService } from '../shared/auth.service';
+import { Chart } from 'chart.js';
 
 @Component({
   selector: 'app-wallet',
@@ -20,20 +22,30 @@ export class WalletComponent implements OnInit {
  
   itemValue = '';
   items: Observable<any[]>;
-  displayedColumns = ['Coin', 'Amount', 'Buy Price', 'Current Price', '24h Change', '7d Change', 'Profit'];
+  displayedColumns = ['Coin', 'Amount', 'Buy Price', 'Current Price', '24h Change', '7d Change', 'Profit', 'Delete'];
   @ViewChild(MatSort) sort: MatSort;
   coin = '';
   amount = '';
   price = '';
 
   hol;
-
+  chart;
 
   pop;
  
-  constructor(public db: AngularFireDatabase,  private auth: AuthService, private http: HttpClient) {
+  listCoinID = [];
+
+  constructor(public db: AngularFireDatabase,  private auth: AuthService, private http: HttpClient, private CoinMarketCapService: CoinMarketCapService) {
     this.items = db.list(`/items/${this.auth.currentUserId}`).valueChanges();
     this.auth.getList();
+
+    this.CoinMarketCapService.getList()
+    .subscribe(res => {
+      for(let i = 0; i < 100; i++){
+        this.listCoinID.push(res[i].id);
+      }
+      console.log(this.listCoinID )})
+      
   }
  
   onSubmit() {
@@ -44,7 +56,7 @@ export class WalletComponent implements OnInit {
     });
     this.coin = '';
     this.amount ='';
-     this.price  = '';
+    this.price  = '';
   }
 
   ngOnInit() {
@@ -69,19 +81,40 @@ export class WalletComponent implements OnInit {
         });
       }
 
-      console.log(this.hol);
+      
       this.dataSource = new MatTableDataSource(this.hol);
       this.dataSource.sort = this.sort;
-    console.log(this.dataSource);
+      console.log(this.dataSource.data[0].key);
+      let amount = this.hol.map(res => res.value.amount);
+      let labels = this.hol.map(res => res.value.coin);
+      let colors = this.hol.map(res => this.getRandomColor());
+
+      this.chart = new Chart('canvas', {
+        type: 'pie',
+        data: {
+          datasets: [{
+              data: amount,
+              backgroundColor: colors,
+          }],
+          labels: labels
+        }
+      });
     });
-
-    
-    console.log(this.hol);
-    console.log(this.auth.currentUserId)
-
-    
+ 
   }
-  
+
+  deleteItem(key: string): void {
+    this.db.object('/items/' + this.auth.currentUserId + '/' + key).remove();
+  }
+
+  getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
 }
 
 export class UserDataSource extends DataSource<any> {
